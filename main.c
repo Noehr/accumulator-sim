@@ -15,7 +15,7 @@ typedef enum {
 } ALUOP;
 
 
-unsigned short alu(ALUOP opcode, unsigned short acc, unsigned short aux) {
+unsigned char alu(ALUOP opcode, unsigned char acc, unsigned char aux) {
 	// Returns next value of accumulator  
 	switch (opcode) {
 	case ALU_NOP:
@@ -40,9 +40,21 @@ unsigned short alu(ALUOP opcode, unsigned short acc, unsigned short aux) {
 }
 
 
+void load(unsigned char * acc, unsigned char * reg, unsigned char address) {
+	// Copy value at register address into accumulator
+	*acc = *(reg + address);
+}
+
+
+void store(unsigned char * acc, unsigned char * reg, unsigned char address) {
+	// Copy value from accumulator to value at register address
+	// Pointer to acc is not necessary but is pointer instead of value for consistency
+	*(reg + address) = *acc;
+}
+
 int main() {
-	unsigned short acc;
-	unsigned short * reg = calloc(255, sizeof(unsigned short));
+	unsigned char acc = 0;
+	unsigned char * reg = calloc(255, sizeof(unsigned short));
 
 	return 0;
 }
