@@ -52,9 +52,33 @@ void store(unsigned char * acc, unsigned char * reg, unsigned char address) {
 	*(reg + address) = *acc;
 }
 
+
+void jump(unsigned int * pc, unsigned int new_pc) {
+	// Set program counter to new instruction number. 
+	*pc = new_pc;
+}
+
+void branch_zero(unsigned char acc, unsigned int * pc, unsigned int new_pc) {
+	// Jump to instruction if accumulator is zero
+	if (acc == 0) {
+		jump(pc, new_pc);
+	}
+}
+
+void branch_positive(unsigned char acc, unsigned int * pc, unsigned int new_pc) {
+	// Jump to instruction if accumulator is positive (>0)
+	// Assumes accumulator is non zero integer. Handling negative number must be implemented in program.
+	if (acc > 0) {
+		jump(pc, new_pc);
+	}
+}
+
 int main() {
+	// Initialise accumulator, registers and program counter. 
 	unsigned char acc = 0;
-	unsigned char * reg = calloc(255, sizeof(unsigned short));
+	unsigned char * reg = calloc(255, sizeof(unsigned char));
+	unsigned int pc = 0;
+	
 
 	return 0;
 }
